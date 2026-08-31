@@ -1,0 +1,1844 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Titanic 4 - Plateforme numérique dédiée à la création de contenus premium, la production audiovisuelle et le développement de projets numériques.">
+    <meta name="theme-color" content="#050A14">
+
+    <!-- Open Graph / réseaux sociaux -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Titanic 4 — L'expérience commence ici">
+    <meta property="og:description" content="Création de contenu, production vidéo, actualités, divertissement et projets numériques.">
+    <meta property="og:locale" content="fr_FR">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Titanic 4">
+    <meta name="twitter:description" content="Plateforme numérique dédiée à la création de contenus premium et aux projets digitaux d'exception.">
+
+    <title>Titanic 4</title>
+
+    <!-- Favicon (monogramme doré T4 en SVG inline, pas de fichier externe requis) -->
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23050A14'/%3E%3Ctext x='32' y='42' font-family='Georgia,serif' font-size='28' font-weight='700' fill='%232E7DD6' text-anchor='middle'%3ET4%3C/text%3E%3C/svg%3E">
+
+    <!-- Font Awesome pour les icônes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* =========================================
+           VARIABLES & RÉINITIALISATION
+        ========================================= */
+        :root {
+            --noir-principal: #050A14;
+            --noir-secondaire: #0A1220;
+            --noir-card: #0D1626;
+            --bleu: #2E7DD6;
+            --bleu-clair: #A8E0FF;
+            --bleu-fonce: #12457A;
+            --texte: #ffffff;
+            --texte-gris: #9FB3CC;
+            --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--noir-principal);
+            color: var(--texte);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        a:focus-visible,
+        button:focus-visible,
+        input:focus-visible,
+        textarea:focus-visible {
+            outline: 2px solid var(--bleu-clair);
+            outline-offset: 3px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        /* =========================================
+           BARRE DE DÉFILEMENT PERSONNALISÉE
+        ========================================= */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--noir-principal);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--bleu);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--bleu-clair);
+        }
+
+        /* =========================================
+           NAVIGATION
+        ========================================= */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(5, 5, 5, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(46, 125, 214, 0.1);
+            transition: var(--transition);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--bleu);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-weight: 700;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--texte);
+            transition: var(--transition);
+            position: relative;
+            font-weight: 500;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--bleu);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--bleu);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 5px;
+            z-index: 1001;
+            background: none;
+            border: none;
+            padding: 8px;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 25px;
+            height: 2px;
+            background: var(--bleu);
+            transition: var(--transition);
+        }
+
+        /* =========================================
+           RECHERCHE
+        ========================================= */
+        .nav-search-item {
+            display: flex;
+        }
+
+        .search-toggle {
+            background: none;
+            border: none;
+            color: var(--bleu);
+            font-size: 1rem;
+            cursor: pointer;
+            padding: 8px;
+            transition: var(--transition);
+        }
+
+        .search-toggle:hover {
+            color: var(--bleu-clair);
+            transform: scale(1.1);
+        }
+
+        .search-bar {
+            display: none;
+            background: rgba(5, 5, 5, 0.98);
+            border-bottom: 1px solid rgba(46, 125, 214, 0.15);
+        }
+
+        .search-bar.active {
+            display: block;
+        }
+
+        .search-bar-inner {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 18px 20px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .search-bar-inner i {
+            color: var(--bleu);
+        }
+
+        .search-bar-inner input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid rgba(46, 125, 214, 0.3);
+            color: var(--texte);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            padding: 8px 4px;
+        }
+
+        .search-bar-inner input:focus {
+            outline: none;
+            border-bottom-color: var(--bleu);
+        }
+
+        .search-bar-inner button {
+            background: none;
+            border: none;
+            color: var(--texte-gris);
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .search-bar-inner button:hover {
+            color: var(--bleu);
+        }
+
+        .search-results {
+            max-width: 700px;
+            margin: 0 auto;
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+
+        .search-results:not(:empty) {
+            padding: 0 20px 20px;
+        }
+
+        .search-result-item {
+            display: block;
+            padding: 14px 16px;
+            border: 1px solid rgba(46, 125, 214, 0.1);
+            margin-bottom: 10px;
+            transition: var(--transition);
+        }
+
+        .search-result-item:hover {
+            border-color: rgba(46, 125, 214, 0.4);
+            background: rgba(46, 125, 214, 0.03);
+        }
+
+        .search-result-item .categorie {
+            display: block;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--bleu);
+            margin-bottom: 4px;
+        }
+
+        .search-result-item .titre {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem;
+            color: var(--texte);
+            margin-bottom: 4px;
+        }
+
+        .search-result-item .description {
+            font-size: 0.85rem;
+            color: var(--texte-gris);
+            line-height: 1.5;
+        }
+
+        .search-message {
+            color: var(--texte-gris);
+            font-size: 0.9rem;
+            padding: 10px 16px;
+        }
+
+        /* =========================================
+           HERO / ACCUEIL
+        ========================================= */
+        #accueil {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: linear-gradient(135deg, #050A14 0%, #0A1526 50%, #050A14 100%);
+            overflow: hidden;
+        }
+
+        /* Grille futuriste en arrière-plan */
+        #accueil::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(46, 125, 214, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(46, 125, 214, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+        }
+
+        /* Halo doré */
+        #accueil::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(46, 125, 214, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            padding: 0 20px;
+            max-width: 900px;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(100deg, var(--bleu-fonce) 0%, var(--bleu) 22%, var(--bleu-clair) 45%, #ffffff 50%, var(--bleu-clair) 55%, var(--bleu) 78%, var(--bleu-fonce) 100%);
+            background-size: 250% auto;
+            background-position: 200% center;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards, eclatDiamant 2.8s ease-out 0.9s 1 forwards;
+        }
+
+        @keyframes eclatDiamant {
+            to { background-position: -50% center; }
+        }
+
+        .hero-content .slogan {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            color: var(--texte-gris);
+            font-weight: 300;
+            letter-spacing: 0.2em;
+            margin-bottom: 3rem;
+            animation: fadeInUp 1s ease 0.3s forwards;
+            opacity: 0;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            padding: 16px 48px;
+            border: 2px solid var(--bleu);
+            color: var(--bleu);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 1s ease 0.6s forwards;
+            opacity: 0;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--bleu);
+            transition: var(--transition);
+            z-index: -1;
+        }
+
+        .btn-primary:hover {
+            color: var(--noir-principal);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(46, 125, 214, 0.2);
+        }
+
+        .btn-primary:hover::before {
+            left: 0;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* =========================================
+           SECTIONS GÉNÉRALES
+        ========================================= */
+        section {
+            padding: 100px 20px;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            color: var(--bleu);
+            margin-bottom: 4rem;
+            position: relative;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 2px;
+            background: var(--bleu);
+            margin: 15px auto 0;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--texte-gris);
+            margin-top: -2rem;
+            margin-bottom: 4rem;
+            font-weight: 300;
+            font-size: 1rem;
+        }
+
+        /* Animations au défilement */
+        .animate {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease;
+        }
+
+        .animate.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* =========================================
+           À PROPOS
+        ========================================= */
+        #apropos {
+            background: var(--noir-secondaire);
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            color: var(--texte-gris);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-content .highlight {
+            color: var(--bleu);
+            font-weight: 500;
+        }
+
+        /* =========================================
+           SERVICES
+        ========================================= */
+        #services {
+            background: var(--noir-principal);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--noir-card);
+            border: 1px solid rgba(46, 125, 214, 0.1);
+            padding: 50px 30px;
+            text-align: center;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--bleu);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(46, 125, 214, 0.3);
+            box-shadow: 0 15px 40px rgba(46, 125, 214, 0.08);
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            color: var(--bleu);
+            margin-bottom: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.1);
+        }
+
+        .service-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--texte);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+        }
+
+        .service-card p {
+            color: var(--texte-gris);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* =========================================
+           GALERIE
+        ========================================= */
+        #galerie {
+            background: var(--noir-secondaire);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            aspect-ratio: 4/3;
+            overflow: hidden;
+            cursor: pointer;
+            border: 1px solid rgba(46, 125, 214, 0.1);
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover {
+            border-color: rgba(46, 125, 214, 0.4);
+        }
+
+        .gallery-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            color: var(--bleu);
+            letter-spacing: 0.1em;
+            transition: var(--transition);
+        }
+
+        .gallery-placeholder i {
+            font-size: 2rem;
+        }
+
+        .gallery-placeholder span {
+            font-size: 0.85rem;
+            color: var(--texte-gris);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+        }
+
+        .gallery-item:nth-child(1) .gallery-placeholder { background: linear-gradient(135deg, #0F1E33, #16293F); }
+        .gallery-item:nth-child(2) .gallery-placeholder { background: linear-gradient(135deg, #0A1526, #0F1D2F); }
+        .gallery-item:nth-child(3) .gallery-placeholder { background: linear-gradient(135deg, #0C1928, #17263B); }
+        .gallery-item:nth-child(4) .gallery-placeholder { background: linear-gradient(135deg, #0F1E33, #0A1220); }
+        .gallery-item:nth-child(5) .gallery-placeholder { background: linear-gradient(135deg, #10203A, #1C3350); }
+        .gallery-item:nth-child(6) .gallery-placeholder { background: linear-gradient(135deg, #0D1626, #172640); }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .gallery-overlay i {
+            font-size: 2rem;
+            color: var(--bleu);
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-item:hover .gallery-placeholder {
+            transform: scale(1.1);
+        }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(5, 5, 5, 0.98);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 80vh;
+            border: 2px solid var(--bleu);
+            background: var(--noir-card);
+            width: 800px;
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+            justify-content: center;
+            color: var(--bleu);
+            font-size: 1.5rem;
+            letter-spacing: 0.1em;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .lightbox-content i {
+            font-size: 3rem;
+        }
+
+        .lightbox-content small {
+            display: block;
+            color: var(--texte-gris);
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+            margin-top: 0.5rem;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            font-size: 2.5rem;
+            color: var(--bleu);
+            cursor: pointer;
+            transition: var(--transition);
+            background: none;
+            border: none;
+        }
+
+        .lightbox-close:hover {
+            transform: rotate(90deg);
+            color: var(--bleu-clair);
+        }
+
+        /* =========================================
+           VIDÉOS
+        ========================================= */
+        #videos {
+            background: var(--noir-principal);
+        }
+
+        .videos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .video-card {
+            background: var(--noir-card);
+            border: 1px solid rgba(46, 125, 214, 0.1);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(46, 125, 214, 0.08);
+            border-color: rgba(46, 125, 214, 0.3);
+        }
+
+        .video-thumbnail {
+            position: relative;
+            aspect-ratio: 16/9;
+            background: linear-gradient(135deg, #0F1E33, #16293F);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            overflow: hidden;
+            border: none;
+            width: 100%;
+            padding: 0;
+        }
+
+        .play-button {
+            width: 60px;
+            height: 60px;
+            border: 2px solid var(--bleu);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--bleu);
+            font-size: 1.2rem;
+            transition: var(--transition);
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .video-thumbnail:hover .play-button {
+            background: var(--bleu);
+            color: var(--noir-principal);
+            transform: scale(1.1);
+        }
+
+        .video-info {
+            padding: 25px;
+        }
+
+        .video-info h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--texte);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+        }
+
+        .video-info p {
+            color: var(--texte-gris);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .btn-watch {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 25px;
+            border: 1px solid var(--bleu);
+            color: var(--bleu);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            transition: var(--transition);
+            background: transparent;
+            cursor: pointer;
+        }
+
+        .btn-watch:hover {
+            background: var(--bleu);
+            color: var(--noir-principal);
+        }
+
+        /* Modale vidéo */
+        .video-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(5, 5, 5, 0.98);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .video-modal.active {
+            display: flex;
+        }
+
+        .video-modal-content {
+            width: 90%;
+            max-width: 900px;
+            aspect-ratio: 16/9;
+            background: var(--noir-card);
+            border: 2px solid var(--bleu);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .video-modal-content iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+
+        .video-modal-content i {
+            font-size: 3rem;
+            color: var(--bleu);
+            margin-bottom: 20px;
+        }
+
+        .video-modal-content h4 {
+            color: var(--texte);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .video-modal-content p {
+            color: var(--texte-gris);
+            font-size: 1.1rem;
+        }
+
+        .video-modal-close {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            font-size: 2.5rem;
+            color: var(--bleu);
+            cursor: pointer;
+            transition: var(--transition);
+            background: none;
+            border: none;
+        }
+
+        .video-modal-close:hover {
+            transform: rotate(90deg);
+        }
+
+        /* =========================================
+           CONTACT
+        ========================================= */
+        #contact {
+            background: var(--noir-secondaire);
+        }
+
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .contact-info h3 {
+            font-size: 1.5rem;
+            color: var(--bleu);
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+        }
+
+        .contact-info p {
+            color: var(--texte-gris);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .contact-detail {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            color: var(--texte-gris);
+        }
+
+        .contact-detail i {
+            color: var(--bleu);
+            font-size: 1.2rem;
+            width: 20px;
+        }
+
+        .contact-detail a {
+            color: var(--texte-gris);
+            transition: var(--transition);
+        }
+
+        .contact-detail a:hover {
+            color: var(--bleu);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            width: 45px;
+            height: 45px;
+            border: 1px solid var(--bleu);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--bleu);
+            transition: var(--transition);
+            font-size: 1rem;
+        }
+
+        .social-links a:hover {
+            background: var(--bleu);
+            color: var(--noir-principal);
+            transform: translateY(-3px);
+        }
+
+        .contact-form {
+            background: var(--noir-card);
+            padding: 40px;
+            border: 1px solid rgba(46, 125, 214, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--texte-gris);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid #1E3654;
+            color: var(--texte);
+            font-family: 'Montserrat', sans-serif;
+            transition: var(--transition);
+            font-size: 0.95rem;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--bleu);
+            background: rgba(46, 125, 214, 0.03);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .form-error {
+            display: block;
+            color: #e07a7a;
+            font-size: 0.8rem;
+            margin-top: 0.4rem;
+            min-height: 1em;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 16px;
+            background: var(--bleu);
+            color: var(--noir-principal);
+            border: none;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+        }
+
+        .btn-submit:hover {
+            background: var(--bleu-clair);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(46, 125, 214, 0.2);
+        }
+
+        .form-status {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: var(--bleu);
+            text-align: center;
+            min-height: 1.2em;
+        }
+
+        /* =========================================
+           FOOTER
+        ========================================= */
+        footer {
+            background: #020509;
+            border-top: 1px solid rgba(46, 125, 214, 0.1);
+            padding: 50px 20px 30px;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--bleu);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--texte-gris);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--bleu);
+        }
+
+        .footer-links span {
+            color: #1E3654;
+        }
+
+        .footer-legal {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-legal a {
+            color: #8CA2BC;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+            transition: var(--transition);
+        }
+
+        .footer-legal a:hover {
+            color: var(--bleu);
+        }
+
+        .copyright {
+            color: #7C93AF;
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+        }
+
+        /* =========================================
+           BOUTON RETOUR EN HAUT
+        ========================================= */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 45px;
+            height: 45px;
+            background: var(--bleu);
+            color: var(--noir-principal);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 999;
+            box-shadow: 0 5px 15px rgba(46, 125, 214, 0.3);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-3px);
+            background: var(--bleu-clair);
+        }
+
+        /* =========================================
+           RESPONSIVE
+        ========================================= */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: rgba(5, 5, 5, 0.98);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 2.5rem;
+                transition: right 0.4s ease;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links a {
+                font-size: 1rem;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(5px, -5px);
+            }
+
+            section {
+                padding: 70px 20px;
+            }
+
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .gallery-grid,
+            .videos-grid,
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.6rem;
+            }
+
+            .contact-form {
+                padding: 25px;
+            }
+
+            .footer-links {
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- =========================================
+         NAVIGATION
+    ========================================= -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#accueil" class="logo"><i class="fas fa-gem" style="font-size: 0.85em; margin-right: 8px;"></i>Titanic 4</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#accueil">Accueil</a></li>
+                <li><a href="#apropos">À propos</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#galerie">Galerie</a></li>
+                <li><a href="#videos">Vidéos</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li class="nav-search-item">
+                    <button class="search-toggle" id="searchToggle" aria-label="Ouvrir la recherche" aria-expanded="false">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </li>
+            </ul>
+            <button class="hamburger" id="hamburger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="navLinks">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <div class="search-bar" id="searchBar">
+            <div class="search-bar-inner">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Rechercher sur le site..." autocomplete="off" aria-label="Rechercher sur le site">
+                <button id="searchClose" aria-label="Fermer la recherche"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="search-results" id="searchResults"></div>
+        </div>
+    </nav>
+
+    <!-- =========================================
+         ACCUEIL / HERO
+    ========================================= -->
+    <header id="accueil">
+        <div class="hero-content">
+            <h1>Bienvenue sur Titanic 4</h1>
+            <p class="slogan">« L'expérience commence ici. »</p>
+            <a href="#apropos" class="btn-primary">Commencer</a>
+        </div>
+    </header>
+
+    <!-- =========================================
+         À PROPOS
+    ========================================= -->
+    <section id="apropos">
+        <div class="container">
+            <h2 class="section-title animate">À Propos</h2>
+            <div class="about-content animate">
+                <p>
+                    <span class="highlight">Titanic 4</span> est une plateforme numérique novatrice dédiée à la création de contenus premium, à la production audiovisuelle et au développement de projets numériques d'exception.
+                </p>
+                <p>
+                    Notre vision est de fusionner l'élégance intemporelle avec les technologies de demain pour offrir une expérience utilisateur unique et immersive. Que vous soyez créateur, entrepreneur ou passionné, Titanic 4 vous accompagne dans la réalisation de vos ambitions les plus audacieuses.
+                </p>
+                <p>
+                    Avec une équipe passionnée et une approche tournée vers l'innovation, nous transformons chaque idée en réalité avec professionnalisme et créativité.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================================
+         SERVICES
+    ========================================= -->
+    <section id="services">
+        <div class="container">
+            <h2 class="section-title animate">Nos Services</h2>
+            <p class="section-subtitle animate">Des solutions complètes pour vos projets</p>
+            
+            <div class="services-grid">
+                <div class="service-card animate" id="service-1">
+                    <div class="service-icon">
+                        <i class="fas fa-pen-nib"></i>
+                    </div>
+                    <h3>Création de contenu</h3>
+                    <p>Textes, visuels et stratégies éditoriales sur mesure pour captiver votre audience et renforcer votre image de marque.</p>
+                </div>
+
+                <div class="service-card animate" id="service-2">
+                    <div class="service-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <h3>Vidéos</h3>
+                    <p>Production, montage et post-production vidéo professionnelle pour des réalisations percutantes et mémorables.</p>
+                </div>
+
+                <div class="service-card animate" id="service-3">
+                    <div class="service-icon">
+                        <i class="fas fa-newspaper"></i>
+                    </div>
+                    <h3>Actualités</h3>
+                    <p>Veille informative et couverture médiatique pour vous tenir informé des dernières tendances et événements majeurs.</p>
+                </div>
+
+                <div class="service-card animate" id="service-4">
+                    <div class="service-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h3>Divertissement</h3>
+                    <p>Expériences ludiques et événements uniques conçus pour émerveiller, surprendre et créer des souvenirs impérissables.</p>
+                </div>
+
+                <div class="service-card animate" id="service-5">
+                    <div class="service-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3>Projets numériques</h3>
+                    <p>Développement web, applications et solutions technologiques innovantes pour propulser votre présence digitale.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================================
+         GALERIE
+    ========================================= -->
+    <section id="galerie">
+        <div class="container">
+            <h2 class="section-title animate">Galerie</h2>
+            <p class="section-subtitle animate">Un aperçu de notre univers</p>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item animate" data-index="0" data-titre="Séance de création éditoriale" data-icone="fa-pen-nib">
+                    <div class="gallery-placeholder"><i class="fas fa-pen-nib"></i><span>Création de contenu</span></div>
+                    <div class="gallery-overlay"><i class="fas fa-expand"></i></div>
+                </div>
+                <div class="gallery-item animate" data-index="1" data-titre="Tournage en studio" data-icone="fa-video">
+                    <div class="gallery-placeholder"><i class="fas fa-video"></i><span>Production vidéo</span></div>
+                    <div class="gallery-overlay"><i class="fas fa-expand"></i></div>
+                </div>
+                <div class="gallery-item animate" data-index="2" data-titre="Salle de rédaction" data-icone="fa-newspaper">
+                    <div class="gallery-placeholder"><i class="fas fa-newspaper"></i><span>Actualités</span></div>
+                    <div class="gallery-overlay"><i class="fas fa-expand"></i></div>
+                </div>
+                <div class="gallery-item animate" data-index="3" data-titre="Événement Titanic 4" data-icone="fa-star">
+                    <div class="gallery-placeholder"><i class="fas fa-star"></i><span>Divertissement</span></div>
+                    <div class="gallery-overlay"><i class="fas fa-expand"></i></div>
+                </div>
+                <div class="gallery-item animate" data-index="4" data-titre="Atelier de développement" data-icone="fa-laptop-code">
+                    <div class="gallery-placeholder"><i class="fas fa-laptop-code"></i><span>Projets numériques</span></div>
+                    <div class="gallery-overlay"><i class="fas fa-expand"></i></div>
+                </div>
+                <div class="gallery-item animate" data-index="5" data-titre="L'équipe Titanic 4" data-icone="fa-users">
+                    <div class="gallery-placeholder"><i class="fas fa-users"></i><span>Notre équipe</span></div>
+                    <div class="gallery-overlay"><i class="fas fa-expand"></i></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Aperçu de l'image">
+        <button class="lightbox-close" id="lightboxClose" aria-label="Fermer"><i class="fas fa-times"></i></button>
+        <div class="lightbox-content" id="lightboxContent">Aperçu de l'image</div>
+    </div>
+
+    <!-- =========================================
+         VIDÉOS
+    ========================================= -->
+    <section id="videos">
+        <div class="container">
+            <h2 class="section-title animate">Nos Vidéos</h2>
+            <p class="section-subtitle animate">Découvrez nos réalisations</p>
+            
+            <div class="videos-grid">
+                <div class="video-card animate">
+                    <button class="video-thumbnail" data-video="1" data-titre="Présentation du projet" data-youtube="krIwmy014XA" aria-label="Lire la vidéo : Présentation du projet">
+                        <div class="play-button"><i class="fas fa-play"></i></div>
+                    </button>
+                    <div class="video-info">
+                        <h3>Présentation du projet</h3>
+                        <p>Découvrez les coulisses de notre dernier projet majeur et les technologies utilisées.</p>
+                        <button class="btn-watch" data-video="1" data-titre="Présentation du projet" data-youtube="krIwmy014XA">Lecture</button>
+                    </div>
+                </div>
+
+                <div class="video-card animate">
+                    <button class="video-thumbnail" data-video="2" data-titre="Interview exclusive" data-youtube="aTFC6FlC-jQ" aria-label="Lire la vidéo : Interview exclusive">
+                        <div class="play-button"><i class="fas fa-play"></i></div>
+                    </button>
+                    <div class="video-info">
+                        <h3>Interview exclusive</h3>
+                        <p>Rencontre avec notre équipe créative autour de la conception et de l'innovation.</p>
+                        <button class="btn-watch" data-video="2" data-titre="Interview exclusive" data-youtube="aTFC6FlC-jQ">Lecture</button>
+                    </div>
+                </div>
+
+                <div class="video-card animate">
+                    <button class="video-thumbnail" data-video="3" data-titre="Événement spécial" data-youtube="TYYgCXNwTtQ" aria-label="Lire la vidéo : Événement spécial">
+                        <div class="play-button"><i class="fas fa-play"></i></div>
+                    </button>
+                    <div class="video-info">
+                        <h3>Événement spécial</h3>
+                        <p>Retour en images sur notre événement annuel rassemblant créateurs et passionnés.</p>
+                        <button class="btn-watch" data-video="3" data-titre="Événement spécial" data-youtube="TYYgCXNwTtQ">Lecture</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modale Vidéo -->
+    <div class="video-modal" id="videoModal" role="dialog" aria-modal="true" aria-label="Lecteur vidéo">
+        <button class="video-modal-close" id="videoModalClose" aria-label="Fermer"><i class="fas fa-times"></i></button>
+        <div class="video-modal-content" id="videoModalContent">
+            <!-- L'iframe YouTube est injectée dynamiquement en JavaScript -->
+        </div>
+    </div>
+
+    <!-- =========================================
+         CONTACT
+    ========================================= -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title animate">Contact</h2>
+            <p class="section-subtitle animate">Une question ? Écrivez-nous</p>
+            
+            <div class="contact-wrapper">
+                <div class="contact-info animate">
+                    <h3>Informations</h3>
+                    <p>Nous sommes à votre écoute pour toute demande, collaboration ou suggestion. N'hésitez pas à nous contacter.</p>
+                    
+                    <div class="contact-detail">
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:contact@titanic4.com">contact@titanic4.com</a>
+                    </div>
+                    <div class="contact-detail">
+                        <i class="fas fa-phone"></i>
+                        <a href="tel:+33123456789">+33 1 23 45 67 89</a>
+                    </div>
+                    <div class="contact-detail">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Paris, France</span>
+                    </div>
+
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/DegameurSilencieux" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/degam_eur226" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://wa.me/22655955191" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="contact-form animate">
+                    <form id="contactForm" novalidate>
+                        <div class="form-group">
+                            <label for="name">Nom</label>
+                            <input type="text" id="name" name="name" required placeholder="Votre nom">
+                            <span class="form-error" id="nameError"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Adresse e-mail</label>
+                            <input type="email" id="email" name="email" required placeholder="votre@email.com">
+                            <span class="form-error" id="emailError"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" required placeholder="Votre message..."></textarea>
+                            <span class="form-error" id="messageError"></span>
+                        </div>
+                        <button type="submit" class="btn-submit">Envoyer</button>
+                        <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================================
+         FOOTER
+    ========================================= -->
+    <footer>
+        <div class="footer-logo">Titanic 4</div>
+        <div class="footer-links">
+            <a href="#accueil">Accueil</a>
+            <span>|</span>
+            <a href="#apropos">À propos</a>
+            <span>|</span>
+            <a href="#services">Services</a>
+            <span>|</span>
+            <a href="#videos">Vidéos</a>
+            <span>|</span>
+            <a href="#contact">Contact</a>
+        </div>
+        <div class="footer-legal">
+            <a href="mentions-legales.html">Mentions légales</a>
+            <a href="politique-confidentialite.html">Politique de confidentialité</a>
+            <a href="cgu.html">CGU</a>
+        </div>
+        <p class="copyright">© 2026 Titanic 4 — Tous droits réservés.</p>
+    </footer>
+
+    <!-- Bouton retour en haut -->
+    <button class="back-to-top" id="backToTop" aria-label="Retour en haut">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- =========================================
+         JAVASCRIPT
+    ========================================= -->
+    <script>
+        // Menu hamburger
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', () => {
+            const isActive = hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+            hamburger.setAttribute('aria-expanded', isActive ? 'true' : 'false');
+        });
+
+        // Fermer le menu au clic sur un lien
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+                hamburger.setAttribute('aria-expanded', 'false');
+            });
+        });
+
+        // Animation au défilement (Intersection Observer)
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Lightbox Galerie
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxContent = document.getElementById('lightboxContent');
+        const lightboxClose = document.getElementById('lightboxClose');
+        let lastFocusedElement = null;
+
+        galleryItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const titre = item.getAttribute('data-titre');
+                const icone = item.getAttribute('data-icone');
+                lightboxContent.innerHTML = `<i class="fas ${icone}"></i><div>${titre}<br><small>Remplacez cet emplacement par votre image</small></div>`;
+                lastFocusedElement = document.activeElement;
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                lightboxClose.focus();
+            });
+        });
+
+        lightboxClose.addEventListener('click', closeLightbox);
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) closeLightbox();
+        });
+
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+            if (lastFocusedElement) lastFocusedElement.focus();
+        }
+
+        // Modale Vidéo
+        const videoTriggers = document.querySelectorAll('.video-thumbnail, .btn-watch');
+        const videoModal = document.getElementById('videoModal');
+        const videoModalClose = document.getElementById('videoModalClose');
+        const videoModalContent = document.getElementById('videoModalContent');
+        let lastFocusedVideoTrigger = null;
+
+        videoTriggers.forEach(trigger => {
+            trigger.addEventListener('click', () => {
+                const youtubeId = trigger.getAttribute('data-youtube');
+                const titre = trigger.getAttribute('data-titre') || 'Lecteur vidéo';
+
+                if (youtubeId) {
+                    videoModalContent.innerHTML = `<iframe src="https://www.youtube.com/embed/${youtubeId}?autoplay=1&rel=0" title="${titre}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+                } else {
+                    videoModalContent.innerHTML = `<i class="fas fa-film"></i><h4>${titre}</h4><p>Emplacement réservé — <small>aucune vidéo associée pour le moment</small></p>`;
+                }
+
+                lastFocusedVideoTrigger = document.activeElement;
+                videoModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                videoModalClose.focus();
+            });
+        });
+
+        videoModalClose.addEventListener('click', closeVideoModal);
+        videoModal.addEventListener('click', (e) => {
+            if (e.target === videoModal) closeVideoModal();
+        });
+
+        function closeVideoModal() {
+            videoModal.classList.remove('active');
+            videoModalContent.innerHTML = ''; // stoppe la lecture en retirant l'iframe
+            document.body.style.overflow = '';
+            if (lastFocusedVideoTrigger) lastFocusedVideoTrigger.focus();
+        }
+
+        // Formulaire de contact avec validation
+        const contactForm = document.getElementById('contactForm');
+        const formStatus = document.getElementById('formStatus');
+
+        function setError(fieldId, errorId, message) {
+            document.getElementById(errorId).textContent = message;
+            document.getElementById(fieldId).style.borderColor = message ? '#e07a7a' : '';
+        }
+
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const message = document.getElementById('message').value.trim();
+            let valid = true;
+
+            if (!name) {
+                setError('name', 'nameError', 'Merci de renseigner votre nom.');
+                valid = false;
+            } else {
+                setError('name', 'nameError', '');
+            }
+
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!email || !emailPattern.test(email)) {
+                setError('email', 'emailError', 'Merci de renseigner une adresse e-mail valide.');
+                valid = false;
+            } else {
+                setError('email', 'emailError', '');
+            }
+
+            if (!message) {
+                setError('message', 'messageError', 'Merci de renseigner un message.');
+                valid = false;
+            } else {
+                setError('message', 'messageError', '');
+            }
+
+            if (!valid) {
+                formStatus.textContent = '';
+                return;
+            }
+
+            // Pas de serveur pour envoyer le message : on ouvre le client mail
+            // de l'utilisateur avec le message pré-rempli, adressé à Titanic 4.
+            const sujet = encodeURIComponent(`Message de ${name} via le site Titanic 4`);
+            const corps = encodeURIComponent(`Nom : ${name}\nE-mail : ${email}\n\nMessage :\n${message}`);
+            window.location.href = `mailto:contact@titanic4.com?subject=${sujet}&body=${corps}`;
+
+            formStatus.textContent = `Merci ${name} ! Ton client mail va s'ouvrir pour envoyer ton message. Si rien ne se passe, écris-nous directement à contact@titanic4.com.`;
+            contactForm.reset();
+        });
+
+        // Bouton retour en haut
+        const backToTop = document.getElementById('backToTop');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Fermer les modales avec la touche Échap
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeLightbox();
+                closeVideoModal();
+                closeSearch();
+            }
+        });
+
+        // =========================================
+        // RECHERCHE INTERNE (100% JavaScript, sans backend)
+        // =========================================
+        const searchToggle = document.getElementById('searchToggle');
+        const searchBar = document.getElementById('searchBar');
+        const searchInput = document.getElementById('searchInput');
+        const searchClose = document.getElementById('searchClose');
+        const searchResults = document.getElementById('searchResults');
+
+        // Contenu recherchable : reflète les services, la galerie et les vidéos du site.
+        // Pour ajouter un élément recherchable, ajoute simplement une ligne ici.
+        const CONTENU_RECHERCHE = [
+            { categorie: 'service', titre: 'Création de contenu', description: "Textes, visuels et stratégies éditoriales sur mesure pour captiver votre audience et renforcer votre image de marque.", ancre: '#service-1' },
+            { categorie: 'service', titre: 'Vidéos', description: "Production, montage et post-production vidéo professionnelle pour des réalisations percutantes et mémorables.", ancre: '#service-2' },
+            { categorie: 'service', titre: 'Actualités', description: "Veille informative et couverture médiatique pour vous tenir informé des dernières tendances et événements majeurs.", ancre: '#service-3' },
+            { categorie: 'service', titre: 'Divertissement', description: "Expériences ludiques et événements uniques conçus pour émerveiller, surprendre et créer des souvenirs impérissables.", ancre: '#service-4' },
+            { categorie: 'service', titre: 'Projets numériques', description: "Développement web, applications et solutions technologiques innovantes pour propulser votre présence digitale.", ancre: '#service-5' },
+            { categorie: 'galerie', titre: 'Création de contenu', description: 'Séance de création éditoriale', ancre: '#galerie' },
+            { categorie: 'galerie', titre: 'Production vidéo', description: 'Tournage en studio', ancre: '#galerie' },
+            { categorie: 'galerie', titre: 'Actualités', description: 'Salle de rédaction', ancre: '#galerie' },
+            { categorie: 'galerie', titre: 'Divertissement', description: 'Événement Titanic 4', ancre: '#galerie' },
+            { categorie: 'galerie', titre: 'Projets numériques', description: 'Atelier de développement', ancre: '#galerie' },
+            { categorie: 'galerie', titre: 'Notre équipe', description: "L'équipe Titanic 4", ancre: '#galerie' },
+            { categorie: 'vidéo', titre: 'Présentation du projet', description: "Découvrez les coulisses de notre dernier projet majeur et les technologies utilisées.", ancre: '#videos' },
+            { categorie: 'vidéo', titre: 'Interview exclusive', description: "Rencontre avec notre équipe créative autour de la conception et de l'innovation.", ancre: '#videos' },
+            { categorie: 'vidéo', titre: 'Événement spécial', description: "Retour en images sur notre événement annuel rassemblant créateurs et passionnés.", ancre: '#videos' },
+            { categorie: 'page', titre: 'Contact', description: "Nos coordonnées et notre formulaire de contact.", ancre: '#contact' },
+            { categorie: 'page', titre: 'À propos', description: "Qui est Titanic 4 et notre vision.", ancre: '#apropos' }
+        ];
+
+        searchToggle.addEventListener('click', () => {
+            const isActive = searchBar.classList.toggle('active');
+            searchToggle.setAttribute('aria-expanded', isActive ? 'true' : 'false');
+            if (isActive) searchInput.focus();
+        });
+
+        searchClose.addEventListener('click', closeSearch);
+
+        function closeSearch() {
+            searchBar.classList.remove('active');
+            searchToggle.setAttribute('aria-expanded', 'false');
+            searchInput.value = '';
+            searchResults.innerHTML = '';
+        }
+
+        // Retire les accents pour une recherche plus tolérante (ex: "evenement" trouve "événement")
+        function normaliser(texte) {
+            return (texte || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        }
+
+        searchInput.addEventListener('input', () => {
+            const terme = searchInput.value.trim();
+
+            if (terme.length < 2) {
+                searchResults.innerHTML = '';
+                return;
+            }
+
+            lancerRecherche(terme);
+        });
+
+        function lancerRecherche(terme) {
+            const t = normaliser(terme);
+            const resultats = CONTENU_RECHERCHE.filter(item =>
+                normaliser(item.titre).includes(t) || normaliser(item.description).includes(t)
+            ).slice(0, 10);
+            afficherResultats(resultats);
+        }
+
+        function afficherResultats(resultats) {
+            if (resultats.length === 0) {
+                searchResults.innerHTML = '<p class="search-message">Aucun résultat trouvé.</p>';
+                return;
+            }
+
+            searchResults.innerHTML = resultats.map(r => `
+                <a class="search-result-item" href="${r.ancre}">
+                    <span class="categorie">${r.categorie}</span>
+                    <span class="titre">${r.titre}</span>
+                    <span class="description">${r.description || ''}</span>
+                </a>
+            `).join('');
+
+            searchResults.querySelectorAll('.search-result-item').forEach(lien => {
+                lien.addEventListener('click', closeSearch);
+            });
+        }
+    </script>
+</body>
+</html>
